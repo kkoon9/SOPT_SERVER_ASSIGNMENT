@@ -73,13 +73,19 @@ module.exports = {
     },
     update: async (req, res) => {
         const {
+            blogIdx,
             comment
         } = req.body;
-        if(!comment) {
-            res.send(utils.successFalse(sc.BAD_REQUEST, rm.NULL_VALUE));
+        if (!blogIdx || !comment) {
+            const missParameters = Object.entries({
+                    blogIdx,
+                    comment
+                })
+                .filter(it => it[1] == undefined).map(it => it[0]).join(',');
+            res.send(utils.successFalse(sc.BAD_REQUEST, `${rm.NULL_VALUE}, ${missParameters}`));
             return;
         }
-        BlogService.update({comment})
+        BlogService.update({blogIdx, comment})
         .then(({
             json
         }) => 
