@@ -32,7 +32,7 @@ module.exports = {
   BLOG_DELETE_FAIL: "블로그 삭제 실패",
 
   /* Article */
-  ARTICLE_EMPTY: "기사가 비어있습니다",
+  NO_ARTICLE: "기사가 없습니다",
   ARTICLE_CREATE_SUCCESS: "기사 작성 성공",
   ARTICLE_CREATE_FAIL: "기사 작성 실패",
   ARTICLE_READ_ALL_SUCCESS: "기사 전체 조회 성공",
