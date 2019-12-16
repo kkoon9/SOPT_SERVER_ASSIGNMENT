@@ -119,17 +119,21 @@ module.exports = {
     },
     delete: ({blogIdx}) => {
         return new Promise(async (resolve, reject) => {
-            const blog = await Blog.delete({
-                where : { blogIdx : blogIdx },
-            });
-            if (!blog) {
-                resolve({
-                    json: utils.successFalse(sc.INTERNAL_SERVER_ERROR, rm.BLOG_UPDATE_FAIL)
+            let blog;
+            try {
+                blog = await Blog.destroy({
+                    where:{
+                        blogIdx: blogIdx
+                    }
                 });
-                return;
+                
+            } catch (error) {
+                reject({
+                    json: utils.successFalse(sc.INTERNAL_SERVER_ERROR, rm.BLOG_DELETE_FAIL)
+                });
             }
             resolve({
-                json: utils.successTrue(sc.SUCCESS, rm.BLOG_UPDATE_SUCCESS)
+                json: utils.successTrue(sc.SUCCESS, rm.BLOG_DELETE_SUCCESS)
             });
         });
     },
