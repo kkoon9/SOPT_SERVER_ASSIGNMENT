@@ -4,7 +4,7 @@ const config = require('../config/config')[env];
 const db = {};
 
 const sequelize = new Sequelize(
-  config.database, config.username, config.password, config,
+  config.database, config.username, config.password, config
 );
 
 db.sequelize = sequelize;
@@ -20,3 +20,5 @@ db.Article.belongsTo(db.Blog);
 /** N:M */
 db.Article.belongsToMany(db.Comment, { through : 'ArticleComment' });
 db.Comment.belongsToMany(db.Article, { through : 'ArticleComment' });
+
+module.exports = db;
