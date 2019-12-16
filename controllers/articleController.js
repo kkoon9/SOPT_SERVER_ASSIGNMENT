@@ -17,12 +17,12 @@ module.exports = {
         });
     },
     read: async (req, res) => {
-        const blogIdx = req.params.blogIdx;
-        if(!blogIdx) {
+        const blogId = req.params.blogId;
+        if(!blogId) {
             res.send(utils.successFalse(sc.BAD_REQUEST, rm.NULL_VALUE));
             return;
         }
-        ArticleService.read({blogIdx})
+        ArticleService.read({blogId})
         .then(({
             json
         }) => 
@@ -33,17 +33,17 @@ module.exports = {
         })
     },
     create: async (req, res) => {
-        const blogIdx = req.params.blogIdx;
         const {
-            title,
-            writer,
+            title, 
+            writer, 
             content
         } = req.body;
+        const blogId = req.params.blogId;
         if (!blogIdx || !title || !writer || !content) {
             const missParameters = Object.entries({
-                    blogIdx,
-                    title,
-                    writer,
+                    blogId,
+                    title, 
+                    writer, 
                     content
                 })
                 .filter(it => it[1] == undefined).map(it => it[0]).join(',');
@@ -51,39 +51,33 @@ module.exports = {
             return;
         }
         ArticleService.create({
-            blogIdx,
-            title,
-            writer,
-            content
-        })
+            blogId,
+            title, 
+            writer, 
+            content})
         .then(({
             json
         }) => 
             res.send(json)
         ).catch(err => {
-            console.log(err);
-            res.send(utils.successFalse(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+            res.send(err);
         })
     },
     update: async (req, res) => {
-        const blogIdx = req.params.blogIdx;
         const {
+            id,
             content
         } = req.body;
-        if (!blogIdx || !content) {
+        if (!id || !content) {
             const missParameters = Object.entries({
-                    blogIdx,
+                    id,
                     content
                 })
                 .filter(it => it[1] == undefined).map(it => it[0]).join(',');
             res.send(utils.successFalse(sc.BAD_REQUEST, `${rm.NULL_VALUE}, ${missParameters}`));
             return;
         }
-        ArticleService.update({
-            blogIdx,
-            title,
-            content
-        })
+        ArticleService.update({id, content})
         .then(({
             json
         }) => 
@@ -94,12 +88,14 @@ module.exports = {
         })
     },
     delete: async (req, res) => {
-        const blogIdx = req.params.blogIdx;
-        if(!blogIdx) {
+        const {
+            id
+        } = req.body;
+        if(!id) {
             res.send(utils.successFalse(sc.BAD_REQUEST, rm.NULL_VALUE));
             return;
         }
-        ArticleService.delete({blogIdx})
+        ArticleService.delete({id})
         .then(({
             json
         }) => 
