@@ -1,11 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('comment', {
-        commentIdx: {
-            field: 'commentIdx',
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
+    return sequelize.define('Comment', {
         nick: {
             field: 'nick',
             type: DataTypes.STRING(40),
@@ -18,9 +12,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
      }, {
-        charset: 'utf8',
-        collate: 'utf8_unicode_ci',
-        underscored: true,
         freezeTableName: true,
         timestamps: false,
     
