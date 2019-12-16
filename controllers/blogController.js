@@ -55,37 +55,36 @@ module.exports = {
     create: async (req, res) => {
         const {
             host,
-            comment
+            introduce
         } = req.body;
         if(!host) {
             res.send(utils.successFalse(sc.BAD_REQUEST, rm.NULL_VALUE));
             return;
         }
-        BlogService.create({host, comment})
+        BlogService.create({host, introduce})
         .then(({
             json
         }) => 
             res.send(json)
         ).catch(err => {
-            console.log(err);
-            res.send(utils.successFalse(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+            res.send(err);
         })
     },
     update: async (req, res) => {
         const {
             blogIdx,
-            comment
+            introduce
         } = req.body;
-        if (!blogIdx || !comment) {
+        if (!blogIdx || !introduce) {
             const missParameters = Object.entries({
                     blogIdx,
-                    comment
+                    introduce
                 })
                 .filter(it => it[1] == undefined).map(it => it[0]).join(',');
             res.send(utils.successFalse(sc.BAD_REQUEST, `${rm.NULL_VALUE}, ${missParameters}`));
             return;
         }
-        BlogService.update({blogIdx, comment})
+        BlogService.update({blogIdx, introduce})
         .then(({
             json
         }) => 
