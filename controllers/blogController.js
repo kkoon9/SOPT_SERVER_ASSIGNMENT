@@ -16,15 +16,15 @@ module.exports = {
             res.send(utils.successFalse(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
         });
     },
-    readblogIdx: async (req, res) => {
+    readblogId: async (req, res) => {
         const {
-            blogIdx
+            id
         } = req.body;
-        if(!blogIdx) {
+        if(!id) {
             res.send(utils.successFalse(sc.BAD_REQUEST, rm.NULL_VALUE));
             return;
         }
-        BlogService.readblogIdx({blogIdx})
+        BlogService.readblogId({id})
         .then(({
             json
         }) => 
@@ -72,19 +72,19 @@ module.exports = {
     },
     update: async (req, res) => {
         const {
-            blogIdx,
+            id,
             introduce
         } = req.body;
-        if (!blogIdx || !introduce) {
+        if (!id || !introduce) {
             const missParameters = Object.entries({
-                    blogIdx,
+                id,
                     introduce
                 })
                 .filter(it => it[1] == undefined).map(it => it[0]).join(',');
             res.send(utils.successFalse(sc.BAD_REQUEST, `${rm.NULL_VALUE}, ${missParameters}`));
             return;
         }
-        BlogService.update({blogIdx, introduce})
+        BlogService.update({id, introduce})
         .then(({
             json
         }) => 
@@ -96,13 +96,13 @@ module.exports = {
     },
     delete: async (req, res) => {
         const {
-            blogIdx
+            id
         } = req.body;
-        if(!blogIdx) {
+        if(!id) {
             res.send(utils.successFalse(sc.BAD_REQUEST, rm.NULL_VALUE));
             return;
         }
-        BlogService.delete({blogIdx})
+        BlogService.delete({blogId})
         .then(({
             json
         }) => 
