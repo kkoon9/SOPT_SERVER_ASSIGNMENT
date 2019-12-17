@@ -39,7 +39,7 @@ module.exports = {
             content
         } = req.body;
         const blogId = req.params.blogId;
-        if (!blogIdx || !title || !writer || !content) {
+        if (!blogId || !title || !writer || !content) {
             const missParameters = Object.entries({
                     blogId,
                     title, 
