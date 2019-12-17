@@ -3,6 +3,7 @@ const router = express.Router();
 const BlogController = require('../controllers/blogController');
 const ArticleController = require('../controllers/articleController');
 const CommentController = require('../controllers/commentController');
+const HashtagController = require('../controllers/hashtagController');
 
 /* Blog */
 router.get('/', BlogController.readAll);
@@ -19,11 +20,18 @@ router.post('/:blogId/articles', ArticleController.create);
 router.put('/articles', ArticleController.update);
 router.delete('/articles', ArticleController.delete);
 
-// /* Hashtag */
-// router.get('/Hashtag', CommentController.readAll);
-// router.get('/articles/:articleIdx/comments', CommentController.read);
-// router.post('/articles/:articleIdx/comments', CommentController.create);
-// router.put('/articles/:articleIdx/comments', CommentController.update);
-// router.delete('/articles/:articleIdx/comments', CommentController.delete);
+/* Comment */
+router.get('/comments', CommentController.readAll);
+router.get('/:articleId/comments', CommentController.read);
+router.post('/:articleId/comments', CommentController.create);
+router.put('/comments', CommentController.update);
+router.delete('/comments', CommentController.delete);
+
+/* Hashtag */
+router.get('/hashtags', HashtagController.readAll);
+router.get('/articles/:articleId/hashtags', HashtagController.read);
+router.post('/articles/:articleId/hashtags', HashtagController.create);
+router.put('/articles/:articleId/hashtags', HashtagController.update);
+router.delete('/articles/:articleId/hashtags', HashtagController.delete);
 
 module.exports = router;
