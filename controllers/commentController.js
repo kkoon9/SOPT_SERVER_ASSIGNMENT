@@ -17,12 +17,12 @@ module.exports = {
         });
     },
     read: async (req, res) => {
-        const articleIdx = req.params.articleIdx;
-        if(!articleIdx) {
+        const articleId = req.params.articleId;
+        if(!articleId) {
             res.send(utils.successFalse(sc.BAD_REQUEST, rm.NULL_VALUE));
             return;
         }
-        CommentService.read({articleIdx})
+        CommentService.read({articleId})
         .then(({
             json
         }) => 
@@ -33,50 +33,48 @@ module.exports = {
         })
     },
     create: async (req, res) => {
-        const articleIdx = req.params.articleIdx;
         const {
-            nick,
+            nick, 
             content
         } = req.body;
-        if (!articleIdx || !nick || !content) {
+        const articleId = req.params.articleId;
+        if (!articleId || !nick || !content) {
             const missParameters = Object.entries({
-                    articleIdx,
-                    nick,
-                    content,
+                    articleId,
+                    nick,  
+                    content
                 })
                 .filter(it => it[1] == undefined).map(it => it[0]).join(',');
             res.send(utils.successFalse(sc.BAD_REQUEST, `${rm.NULL_VALUE}, ${missParameters}`));
             return;
         }
         CommentService.create({
-            articleIdx,
-            nick,
-            content
-        })
+            articleId,
+            nick, 
+            content})
         .then(({
             json
         }) => 
             res.send(json)
         ).catch(err => {
-            console.log(err);
-            res.send(utils.successFalse(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+            res.send(err);
         })
     },
     update: async (req, res) => {
-        const articleIdx = req.params.articleIdx;
         const {
+            id,
             content
         } = req.body;
-        if (!articleIdx || !content) {
+        if (!id || !content) {
             const missParameters = Object.entries({
-                    articleIdx,
-                    content,
+                    id,
+                    content
                 })
                 .filter(it => it[1] == undefined).map(it => it[0]).join(',');
             res.send(utils.successFalse(sc.BAD_REQUEST, `${rm.NULL_VALUE}, ${missParameters}`));
             return;
         }
-        CommentService.update({articleIdx, contnet})
+        CommentService.update({id, content})
         .then(({
             json
         }) => 
@@ -87,12 +85,14 @@ module.exports = {
         })
     },
     delete: async (req, res) => {
-        const articleIdx = req.params.articleIdx;
-        if(!articleIdx) {
+        const {
+            id
+        } = req.body;
+        if(!id) {
             res.send(utils.successFalse(sc.BAD_REQUEST, rm.NULL_VALUE));
             return;
         }
-        CommentService.delete({articleIdx})
+        CommentService.delete({id})
         .then(({
             json
         }) => 
