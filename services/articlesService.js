@@ -5,7 +5,7 @@ const sc = require('../module/util/statusCode');
 /**
  * models을 가져오려면 index를 가져와야한다. ArticleModel를 가져오면 안된다!
  */
-const {Blog, Article, Comment} = require('../models');
+const {Article} = require('../models');
 
 module.exports = {
     readAll: () => {
