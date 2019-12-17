@@ -46,13 +46,26 @@ module.exports = {
   ALREADY_ARTICLE: "존재하는 기사 입니다.",
 
   /* Comment */
-  COMMENT_EMPTY: "조회할 댓글이 없습니다",
+  NO_COMMENT: "댓글이 없습니다",
   COMMENT_CREATE_SUCCESS: "댓글 작성 성공",
   COMMENT_CREATE_FAIL: "댓글 작성 실패",
+  COMMENT_READ_ALL_SUCCESS: "댓글 전체 조회 성공",
+  COMMENT_READ_ALL_FAIL: "댓글 전체 조회 실패",
   COMMENT_READ_SUCCESS: "댓글 조회 성공",
   COMMENT_READ_FAIL: "댓글 조회 실패",
   COMMENT_UPDATE_SUCCESS: "댓글 수정 성공",
   COMMENT_UPDATE_FAIL: "댓글 수정 실패",
   COMMENT_DELETE_SUCCESS: "댓글 삭제 성공",
-  COMMENT_DELETE_FAIL: "댓글 삭제 실패",  
+  COMMENT_DELETE_FAIL: "댓글 삭제 실패",
+
+  /* Hashtag */
+  HASHTAG_EMPTY: "조회할 해쉬 태그가 없습니다",
+  HASHTAG_CREATE_SUCCESS: "해쉬 태그 작성 성공",
+  HASHTAG_CREATE_FAIL: "해쉬 태그 작성 실패",
+  HASHTAG_READ_SUCCESS: "해쉬 태그 조회 성공",
+  HASHTAG_READ_FAIL: "해쉬 태그 조회 실패",
+  HASHTAG_UPDATE_SUCCESS: "해쉬 태그 수정 성공",
+  HASHTAG_UPDATE_FAIL: "해쉬 태그 수정 실패",
+  HASHTAG_DELETE_SUCCESS: "해쉬 태그 삭제 성공",
+  HASHTAG_DELETE_FAIL: "해쉬 태그 삭제 실패",  
 };
