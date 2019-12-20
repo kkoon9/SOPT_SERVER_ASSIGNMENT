@@ -9,16 +9,27 @@ const sequelize = new Sequelize(
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+db.User = require('./userModel')(sequelize, Sequelize);
 db.Blog = require('./blogModel')(sequelize, Sequelize);
 db.Article = require('./articleModel')(sequelize, Sequelize);
 db.Comment = require('./commentModel')(sequelize, Sequelize);
+db.Hashtag = require('./hashtagModel')(sequelize, Sequelize);
+db.Photo = require('./photoModel')(sequelize,Sequelize);
 
-/** 1:N */
+/** 1:N Blog : Article */
 db.Blog.hasMany(db.Article);
 db.Article.belongsTo(db.Blog);
 
+/** 1:N Article : Comment */
+db.Article.hasMany(db.Comment);
+db.Comment.belongsTo(db.Article);
+
+/** 1:N Article : Photo */
+db.Article.hasMany(db.Photo);
+db.Photo.belongsTo(db.Article);
+
 /** N:M */
-db.Article.belongsToMany(db.Comment, { through : 'ArticleComment' });
-db.Comment.belongsToMany(db.Article, { through : 'ArticleComment' });
+db.Article.belongsToMany(db.Hashtag, { through : 'ArticleHashtag' });
+db.Hashtag.belongsToMany(db.Article, { through : 'ArticleHashtag' });
 
 module.exports = db;
