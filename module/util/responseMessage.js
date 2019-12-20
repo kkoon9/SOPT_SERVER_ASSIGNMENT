@@ -13,6 +13,8 @@ module.exports = {
   NULL_VALUE: "필요한 값이 없습니다",
   OUT_OF_VALUE: "파라미터 값이 잘못 되었습니다.",
   INTERNAL_SERVER_ERROR: "서버 내부 오류",
+  NEED_LOGIN : "로그인 필요",
+  CANT_ACCESS : "접근할 수 없습니다",
 
   /* Blog */
   ALREADY_HOST: "존재하는 HOST 이름입니다.",
@@ -57,6 +59,15 @@ module.exports = {
   COMMENT_UPDATE_FAIL: "댓글 수정 실패",
   COMMENT_DELETE_SUCCESS: "댓글 삭제 성공",
   COMMENT_DELETE_FAIL: "댓글 삭제 실패",
+
+  /* User */
+  ALREADY_EMAIL : "이미 있는 이메일입니다",
+  JOIN_SUCCESS : "회원가입 성공",
+  JOIN_FAIL : "회원가입 실패",
+  LOGIN_SUCCESS : "로그인 성공",
+  MISS_MATCH_PASSWORD : "비밀번호가 일치하지 않습니다.",
+  PASSWORD_ENCRYPTION_FAIL: "비밀번호 암호화에 실패하셨습니다",
+  NO_EMAIL : "존재하지 않은 아이디입니다",
 
   /* Hashtag */
   HASHTAG_EMPTY: "조회할 해쉬 태그가 없습니다",
