@@ -3,12 +3,17 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
+const passport = require('passport');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
-const sequelize = require('./models').sequelize;
+const {sequelize} = require('./models');
+const passportConfig = require('./module/passport');
+
 const app = express();
 sequelize.sync();
+passportConfig(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +26,24 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+  },
+}));
+/**
+ * 요청(req 객체)에 passport 설정을 심는다.
+ */
+app.use(passport.initialize());
+/**
+ * req.session 객체에 passport 정보를 저장한다.
+ * req.session 객체는 express-session에서 생성하는 것이므로 passport 미들웨어는 express-session 미들웨어보다 뒤에 연결해야 한다.
+ */
+app.use(passport.session());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
